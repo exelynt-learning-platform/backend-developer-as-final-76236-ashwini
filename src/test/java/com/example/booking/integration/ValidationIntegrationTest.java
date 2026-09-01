@@ -33,6 +33,9 @@ class ValidationIntegrationTest {
     private UserRepository userRepository;
 
     @Autowired
+    private com.example.booking.repository.ReservationRepository reservationRepository;
+
+    @Autowired
     private PasswordEncoder passwordEncoder;
 
     private final ObjectMapper objectMapper = new ObjectMapper().registerModule(new JavaTimeModule());
@@ -40,6 +43,7 @@ class ValidationIntegrationTest {
 
     @BeforeEach
     void setUp() throws Exception {
+        reservationRepository.deleteAll();
         userRepository.deleteAll();
         userRepository.save(User.builder()
                 .name("Admin").email("admin@test.com")

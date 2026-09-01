@@ -40,12 +40,16 @@ class AuthorizationIntegrationTest {
     private UserRepository userRepository;
 
     @Autowired
+    private com.example.booking.repository.ReservationRepository reservationRepository;
+
+    @Autowired
     private PasswordEncoder passwordEncoder;
 
     private final ObjectMapper objectMapper = new ObjectMapper().registerModule(new JavaTimeModule());
 
     @BeforeEach
     void setUp() {
+        reservationRepository.deleteAll();
         userRepository.deleteAll();
         userRepository.save(User.builder()
                 .name("Admin").email("admin@test.com")
